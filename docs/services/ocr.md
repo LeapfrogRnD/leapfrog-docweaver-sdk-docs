@@ -42,7 +42,7 @@ from leapx.common.types.providers import OCRProviderType
 pipeline = linear_pipeline(
     json_schema=schema,
     system_prompt=prompt,
-    ocr_provider=OCRProviderType.AZURE_DOCUMENT_INTELLIGENCE,
+    ocr_provider=OCRProviderType.AZURE,
 )
 ```
 
@@ -59,8 +59,8 @@ AWS_REGION=us-east-1
 ### Azure Document Intelligence
 
 ```bash
-AZURE_DOCUMENT_INTELLIGENCE_ENDPOINT=https://your-resource.cognitiveservices.azure.com/
-AZURE_DOCUMENT_INTELLIGENCE_KEY=your_key
+AZURE_OCR_ENDPOINT=https://your-resource.cognitiveservices.azure.com/
+AZURE_OCR_API_KEY=your_key
 ```
 
 ## OCR Output

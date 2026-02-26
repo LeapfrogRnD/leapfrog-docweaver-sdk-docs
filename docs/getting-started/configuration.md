@@ -17,13 +17,13 @@ AWS_SECRET_ACCESS_KEY=your_secret_key
 AWS_REGION=us-east-1
 
 # Azure Credentials (for Document Intelligence OCR)
-AZURE_DOCUMENT_INTELLIGENCE_ENDPOINT=https://your-resource.cognitiveservices.azure.com/
-AZURE_DOCUMENT_INTELLIGENCE_KEY=your_key
+AZURE_OCR_ENDPOINT=https://your-resource.cognitiveservices.azure.com/
+AZURE_OCR_API_KEY=your_key
 
 # Langfuse (for LLM observability)
 LANGFUSE_PUBLIC_KEY=your_public_key
 LANGFUSE_SECRET_KEY=your_secret_key
-LANGFUSE_HOST=https://cloud.langfuse.com
+LANGFUSE_BASE_URL=https://cloud.langfuse.com
 ```
 
 ## OCR Provider Configuration
@@ -55,7 +55,7 @@ from leapx.common.types.providers import OCRProviderType
 pipeline = linear_pipeline(
     json_schema=MySchema.model_json_schema(),
     system_prompt="Extract data",
-    ocr_provider=OCRProviderType.AZURE_DOCUMENT_INTELLIGENCE,
+    ocr_provider=OCRProviderType.AZURE,
 )
 ```
 
@@ -131,6 +131,20 @@ pipeline = linear_pipeline(
 )
 ```
 
+## Context Management Configuration
+
+```python
+from leapx.common.types.providers import ParsingMethod
+
+pipeline = linear_pipeline(
+    json_schema=MySchema.model_json_schema(),
+    system_prompt="Extract data",
+    parser=ParsingMethod.LAYOUT_CONSERVED,  
+    enable_context=True,   #preserves the context of previous page content , result to the next page
+)
+```
+
+
 ## Full Configuration Example
 
 ```python
@@ -159,6 +173,8 @@ pipeline = linear_pipeline(
     llm_cache_config=CacheConfig(enabled=True),
     temperature=0.0,
     max_tokens="30000",
+    # Context Status
+    enable_context=True,
 )
 ```
 
