@@ -77,4 +77,5 @@ OCR → Parser → LLM Extraction
 
 - [OCR Service](./ocr.md) - Input to the parser
 - [Extractor Service](./extractor.md) - Uses parser output
+- [Generator Service](./generator.md) - LLM generation based on parsed text
 - [Stages](../concepts/stages.md) - Pipeline stage details
