@@ -19,24 +19,28 @@ import Link from '@docusaurus/Link';
 const DocSections = [
   {
     title: "Quickstart",
+    to: "/docs/getting-started/quickstart",
     icon: <Zap className="icon" />,
     description:
       "Get LeapX running in under 5 minutes with our step-by-step guide.",
   },
   {
     title: "Pipeline API",
+    to: "/docs/concepts/pipeline-overview",
     icon: <Layers className="icon" />,
     description:
       "Detailed reference for OCR, Parser, and LLM extraction stages.",
   },
   {
     title: "Schema Definitions",
+    to: "/docs/concepts/json-schema",
     icon: <BrainCircuit className="icon" />,
     description:
       "Learn how to use Pydantic models to define your extraction targets.",
   },
   {
     title: "Deployment",
+    to: "/docs/getting-started/configuration",
     icon: <Cpu className="icon" />,
     description:
       "Production guides for Docker, Kubernetes, and Cloud providers.",
@@ -83,23 +87,24 @@ const WorkflowStep = ({ icon: Icon, label, active }) => (
   </div>
 );
 
-const DocCard = ({ title, icon, description }) => (
-  <a href="#" className="doc-card">
+const DocCard = ({ title, icon, description, to = '#' }) => (
+  <Link to={to} className="doc-card" aria-label={`Open ${title} documentation`}>
     <div className="doc-card-header">
       <div className="doc-card-icon">{icon}</div>
       <h3 className="doc-card-title">{title}</h3>
     </div>
     <p className="doc-card-desc">{description}</p>
-  </a>
+    <div className="doc-card-cta">Read guide →</div>
+  </Link>
 );
 
-export default function App() {
+export default function HomepageFeatures() {
   const [activeStep, setActiveStep] = useState(0);
 
   useEffect(() => {
     const timer = setInterval(() => {
       setActiveStep((prev) => (prev + 1) % 3);
-    }, 3000);
+    }, 2500);
     return () => clearInterval(timer);
   }, []);
 
