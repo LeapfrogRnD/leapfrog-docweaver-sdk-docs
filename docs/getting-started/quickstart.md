@@ -31,7 +31,7 @@ class DocumentInfo(BaseModel):
 async def extract_document():
     pipeline = linear_pipeline(
         json_schema=DocumentInfo.model_json_schema(),
-        system_prompt="Extract the document information from the OCR text.",
+        additional_instructions="Extract the document information from the OCR text.",
     )
     
     # 3. Run extraction
@@ -75,7 +75,7 @@ from leapx.pipeline.stages.layers import Stage
 
 pipeline = linear_pipeline(
     json_schema=InvoiceData.model_json_schema(),
-    system_prompt="Extract invoice details from the document.",
+    additional_instructions="Extract invoice details from the document.",
     stages=[Stage.OCR, Stage.PARSER, Stage.LLM_EXTRACTION],  # Optional: explicit stages
     max_tokens="30000",
 )
@@ -104,7 +104,7 @@ from leapx.pipeline.stages.layers import Stage
 
 pipeline = linear_pipeline(
     json_schema=MySchema.model_json_schema(),
-    system_prompt="Extract the required fields.",
+    additional_instructions="Extract the required fields.",
     stages=[Stage.LLM_EXTRACTION],  # Only extraction, no OCR/Parser
 )
 
@@ -147,7 +147,7 @@ async def extract_invoice(file_path: str) -> dict:
     # Create pipeline with caching enabled
     pipeline = linear_pipeline(
         json_schema=Invoice.model_json_schema(),
-        system_prompt="""
+        additional_instructions="""
         Extract all invoice information from the document.
         Be precise with numbers and dates.
         Format dates as YYYY-MM-DD.

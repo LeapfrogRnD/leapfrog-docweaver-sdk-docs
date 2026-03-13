@@ -17,7 +17,7 @@ class MySchema(BaseModel):
 
 pipeline = linear_pipeline(
     json_schema=MySchema.model_json_schema(),
-    system_prompt="Extract the document title.",
+    additional_instructions="Extract the document title.",
 )
 
 result = await pipeline.async_run("document.pdf")
@@ -40,7 +40,7 @@ from leapx.pipeline.stages.layers import Stage
 
 pipeline = linear_pipeline(
     json_schema=schema,
-    system_prompt=prompt,
+    additional_instructions=instructions,
     stages=[Stage.OCR, Stage.PARSER, Stage.LLM_EXTRACTION],
 )
 ```
@@ -54,7 +54,7 @@ from leapx import InputType
 
 pipeline = linear_pipeline(
     json_schema=schema,
-    system_prompt=prompt,
+    additional_instructions=instructions,
     stages=[Stage.LLM_EXTRACTION],
 )
 
@@ -68,7 +68,7 @@ result = await pipeline.async_run("Your text here", input_type=InputType.TEXT)
 ```python
 pipeline = linear_pipeline(
     json_schema=schema,
-    system_prompt=prompt,
+    additional_instructions=instructions,
     llm_model="anthropic.claude-3-sonnet-20240229-v1:0",
     temperature=0.0,
     max_tokens="30000",
@@ -82,7 +82,7 @@ from leapx.common.types.providers import OCRProviderType
 
 pipeline = linear_pipeline(
     json_schema=schema,
-    system_prompt=prompt,
+    additional_instructions=instructions,
     ocr_provider=OCRProviderType.AWS_TEXTRACT,
 )
 ```
@@ -94,7 +94,7 @@ from leapx.common.types.providers import ParsingMethod
 
 pipeline = linear_pipeline(
     json_schema=schema,
-    system_prompt=prompt,
+    additional_instructions=instructions,
     parser=ParsingMethod.LAYOUT_CONSERVED,
 )
 ```
@@ -119,7 +119,7 @@ class InvoiceData(BaseModel):
 async def extract_invoice(file_path: str):
     pipeline = linear_pipeline(
         json_schema=InvoiceData.model_json_schema(),
-        system_prompt="Extract invoice information accurately.",
+        additional_instructions="Extract invoice information accurately.",
         stages=[Stage.OCR, Stage.PARSER, Stage.LLM_EXTRACTION],
         max_tokens="30000",
         temperature=0.0,

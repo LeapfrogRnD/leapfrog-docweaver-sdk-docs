@@ -30,7 +30,7 @@ from leapx import linear_pipeline
 
 pipeline = linear_pipeline(
     json_schema=MySchema.model_json_schema(),
-    system_prompt="Extract data",
+    additional_instructions="Extract data",
 )
 
 # File path - uses full pipeline (OCR -> Parser -> Extraction)
@@ -48,7 +48,7 @@ from leapx.pipeline.stages.layers import Stage
 # For text input, typically use only extraction stage
 pipeline = linear_pipeline(
     json_schema=MySchema.model_json_schema(),
-    system_prompt="Extract data",
+    additional_instructions="Extract data",
     stages=[Stage.LLM_EXTRACTION],
 )
 
@@ -106,14 +106,14 @@ from leapx.pipeline.stages.layers import Stage
 # ❌ Inefficient - includes unnecessary OCR/Parser
 pipeline = linear_pipeline(
     json_schema=schema,
-    system_prompt=prompt,
+    additional_instructions=instructions,
     stages=[Stage.OCR, Stage.PARSER, Stage.LLM_EXTRACTION],
 )
 
 # ✅ Efficient - extraction only
 pipeline = linear_pipeline(
     json_schema=schema,
-    system_prompt=prompt,
+    additional_instructions=instructions,
     stages=[Stage.LLM_EXTRACTION],
 )
 

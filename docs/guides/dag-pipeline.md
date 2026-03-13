@@ -27,7 +27,7 @@ llm_stage = LLMStage(config=llm_config).after(parser_stage)
 
 pipeline = dag_pipeline(
     json_schema=MySchema.model_json_schema(),
-    system_prompt="Extract data",
+    additional_instructions="Extract data",
     stages=[ocr_stage, parser_stage, llm_stage],
 )
 
@@ -76,7 +76,7 @@ extraction = LLMStage(config=llm_cfg).after(parser, layout)
 
 pipeline = dag_pipeline(
     json_schema=schema,
-    system_prompt=prompt,
+    additional_instructions=instructions,
     stages=[ocr, parser, layout, extraction],
 )
 ```
@@ -106,7 +106,7 @@ parser_cfg = ParserConfig(
 llm_cfg = LLMExtractionConfig(
     model="anthropic.claude-3-sonnet-20240229-v1:0",
     credential=BedrockCredential(),
-    system_prompt="Extract data accurately.",
+    additional_instructions="Extract data accurately.",
     temperature=0.0,
     max_tokens=30000,
 )

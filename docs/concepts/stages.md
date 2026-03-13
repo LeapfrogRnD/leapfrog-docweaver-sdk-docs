@@ -87,7 +87,7 @@ from leapx.services.extractor.extractor_factory import ExtractorProvider
 llm_config = LLMExtractionConfig(
     model="anthropic.claude-3-sonnet-20240229-v1:0",
     credential=BedrockCredential(),
-    system_prompt="Extract the data accurately.",
+    additional_instructions="Extract the data accurately.",
     temperature=0.0,
     max_tokens=30000,
     cache_config=CacheConfig(enabled=True),
@@ -119,14 +119,14 @@ from leapx.pipeline.stages.layers import Stage
 # Full pipeline
 full_pipeline = linear_pipeline(
     json_schema=schema,
-    system_prompt=prompt,
+    additional_instructions=instructions,
     stages=[Stage.OCR, Stage.PARSER, Stage.LLM_EXTRACTION],
 )
 
 # Extraction only (for pre-processed text)
 extraction_only = linear_pipeline(
     json_schema=schema,
-    system_prompt=prompt,
+    additional_instructions=instructions,
     stages=[Stage.LLM_EXTRACTION],
 )
 ```

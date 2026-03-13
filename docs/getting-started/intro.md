@@ -53,7 +53,7 @@ class InvoiceData(BaseModel):
 async def main():
     pipeline = linear_pipeline(
         json_schema=InvoiceData.model_json_schema(),
-        system_prompt="Extract invoice information from the document.",
+        additional_instructions="Extract invoice information from the document.",
     )
     result = await pipeline.async_run("invoice.pdf")
     print(result)

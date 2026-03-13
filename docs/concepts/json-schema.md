@@ -116,7 +116,7 @@ schema = {
 
 pipeline = linear_pipeline(
     json_schema=schema,
-    system_prompt="Extract document info",
+    additional_instructions="Extract document info",
 )
 ```
 

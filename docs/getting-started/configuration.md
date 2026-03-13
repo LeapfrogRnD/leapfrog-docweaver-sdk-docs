@@ -37,7 +37,7 @@ from leapx.services.credentials.ocr.aws_config import AwsOcrCredential
 
 pipeline = linear_pipeline(
     json_schema=MySchema.model_json_schema(),
-    system_prompt="Extract data",
+    additional_instructions="Extract data",
     ocr_provider=OCRProviderType.AWS_TEXTRACT,
     ocr_credential=AwsOcrCredential(
         aws_access_key_id="your_key",
@@ -54,7 +54,7 @@ from leapx.common.types.providers import OCRProviderType
 
 pipeline = linear_pipeline(
     json_schema=MySchema.model_json_schema(),
-    system_prompt="Extract data",
+    additional_instructions="Extract data",
     ocr_provider=OCRProviderType.AZURE,
 )
 ```
@@ -68,7 +68,7 @@ from leapx.services.credentials.bedrock_config import BedrockCredential
 
 pipeline = linear_pipeline(
     json_schema=MySchema.model_json_schema(),
-    system_prompt="Extract data",
+    additional_instructions="Extract data",
     llm_provider_credential=BedrockCredential(
         aws_access_key_id="your_key",
         aws_secret_access_key="your_secret",
@@ -83,7 +83,7 @@ pipeline = linear_pipeline(
 ```python
 pipeline = linear_pipeline(
     json_schema=MySchema.model_json_schema(),
-    system_prompt="Extract data",
+    additional_instructions="Extract data",
     llm_model="anthropic.claude-3-sonnet-20240229-v1:0",
     temperature=0.0,
     max_tokens="30000",
@@ -113,7 +113,7 @@ llm_cache = CacheConfig(
 
 pipeline = linear_pipeline(
     json_schema=MySchema.model_json_schema(),
-    system_prompt="Extract data",
+    additional_instructions="Extract data",
     ocr_cache_config=ocr_cache,
     llm_cache_config=llm_cache,
 )
@@ -126,7 +126,7 @@ from leapx.common.types.providers import ParsingMethod
 
 pipeline = linear_pipeline(
     json_schema=MySchema.model_json_schema(),
-    system_prompt="Extract data",
+    additional_instructions="Extract data",
     parser=ParsingMethod.LAYOUT_CONSERVED,  # Preserves document layout
 )
 ```
@@ -138,7 +138,7 @@ from leapx.common.types.providers import ParsingMethod
 
 pipeline = linear_pipeline(
     json_schema=MySchema.model_json_schema(),
-    system_prompt="Extract data",
+    additional_instructions="Extract data",
     parser=ParsingMethod.LAYOUT_CONSERVED,  
     enable_context=True,   #preserves the context of previous page content , result to the next page
 )
@@ -155,9 +155,9 @@ from leapx.services.credentials.bedrock_config import BedrockCredential
 from leapx.services.credentials.ocr.aws_config import AwsOcrCredential
 
 pipeline = linear_pipeline(
-    # Schema & Prompt
+    # Schema & Additional instructions
     json_schema=MySchema.model_json_schema(),
-    system_prompt="Extract the required information accurately.",
+    additional_instructions="Extract the required information accurately.",
     
     # OCR Configuration
     ocr_provider=OCRProviderType.AWS_TEXTRACT,

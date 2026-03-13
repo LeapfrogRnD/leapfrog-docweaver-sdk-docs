@@ -23,7 +23,7 @@ from leapx.common.cache.cache_config import CacheConfig
 
 pipeline = linear_pipeline(
     json_schema=schema,
-    system_prompt=prompt,
+    additional_instructions=instructions,
     ocr_cache_config=CacheConfig(enabled=True),
     llm_cache_config=CacheConfig(enabled=True),
 )
