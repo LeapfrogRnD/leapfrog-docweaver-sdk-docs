@@ -23,11 +23,11 @@ const config = {
   url: 'https://LeapFrogRnd.github.io',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/leapx-docs/',
+  baseUrl: '/leap-doc-weaver-sdk-docs/',
 
   // GitHub pages deployment config.
   organizationName: 'LeapFrogRnd', // Usually your GitHub org/user name.
-  projectName: 'leapx-docs', // Usually your repo name.
+  projectName: 'leap-doc-weaver-sdk-docs', // Usually your repo name.
   trailingSlash: false,
 
   onBrokenLinks: 'throw',
