@@ -14,14 +14,14 @@ The generation stage uses a configured LLM provider to convert parsed or raw tex
 ## What it does
 
 - Accepts parsed text (from layout parsing / parser stages) or direct text chunks.
-- Builds a GenerationRequest containing system and user prompts, model selection and generation parameters.
+- Builds a GenerationRequest containing system prompt and user instructions, model selection and generation parameters.
 - Optionally includes context from previous chunks to create context-aware prompts.
 - Sends the request to the configured generator service and returns the generation response.
 
 ## Key Features
 
 - Context-aware generation: when enabled, previous parsing and generation outputs are appended to the user prompt to provide continuity across chunks.
-- Stage-level prompt override: system prompt can be customized per-stage via stage configuration.
+- Stage-level prompt: system prompt can be customized per-stage via additional instruction parameter.
 - Runtime config overrides: generation settings may be overridden at runtime when invoking the stage (response_model is handled separately).
 - LLM rate/usage limiting: the stage can integrate with a PoolManager to enforce LLM usage limits.
 - Graceful cleanup: generator services that expose a close method are closed when the stage is closed.
@@ -32,7 +32,7 @@ Typical options passed when creating a pipeline or stage:
 
 - llm_provider: provider identifier (e.g., "bedrock", "openai", "anthropic").
 - llm_model: model identifier for the provider.
-- system_prompt: Optional system prompt for the generation model.
+- additional_instructions: Optional instructions for llm model.
 - user_prompt: Base user prompt; the stage injects the parsed text as the content.
 - max_tokens: Maximum tokens to request from the model.
 - temperature, top_p, etc.: Model-specific generation parameters.
@@ -50,7 +50,7 @@ pipeline = linear_pipeline(
     enable_context=True,
     llm_provider="bedrock",
     llm_model="bedrock/us.anthropic.claude-sonnet-4-5-20250929-v1:0",
-    system_prompt="You are an assistant that extracts fields from text.",
+    additional_instructions="You are an assistant that extracts fields from text.",
     max_tokens=30000,
 )
 ```
@@ -82,7 +82,7 @@ The stage returns a structured StageOutput containing:
 ## Best practices
 
 - Enable context only when feeding the pipeline with chunked inputs that need continuity.
-- Use stage or runtime system_prompt overrides to adapt generated outputs without changing the base pipeline configuration.
+- Use stage or runtime additional instructions overrides to adapt generated outputs without changing the base pipeline configuration.
 - Prefer using a PoolManager or provider-side rate limiting to avoid overuse and throttling.
 - Persist or cache generation results if reproducibility or cost control is important.
 

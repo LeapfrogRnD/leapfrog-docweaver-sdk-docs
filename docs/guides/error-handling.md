@@ -64,7 +64,7 @@ async def safe_extract(file_path: str):
     try:
         pipeline = linear_pipeline(
             json_schema=schema,
-            system_prompt=prompt,
+            additional_instructions=instructions,
         )
         result = await pipeline.async_run(file_path)
         return {"success": True, "data": result}
@@ -130,7 +130,7 @@ async def extract_with_fallback(file_path: str):
     try:
         pipeline = linear_pipeline(
             json_schema=schema,
-            system_prompt=prompt,
+            additional_instructions=instructions,
             llm_model="anthropic.claude-3-sonnet-20240229-v1:0",
         )
         return await pipeline.async_run(file_path)
@@ -141,7 +141,7 @@ async def extract_with_fallback(file_path: str):
     try:
         pipeline = linear_pipeline(
             json_schema=schema,
-            system_prompt=prompt,
+            additional_instructions=instructions,
             llm_model="anthropic.claude-3-haiku-20240307-v1:0",
         )
         return await pipeline.async_run(file_path)

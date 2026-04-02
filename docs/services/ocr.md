@@ -24,7 +24,7 @@ from leapx.services.credentials.ocr.aws_config import AwsOcrCredential
 
 pipeline = linear_pipeline(
     json_schema=schema,
-    system_prompt=prompt,
+    additional_instructions=instructions,
     ocr_provider=OCRProviderType.AWS_TEXTRACT,
     ocr_credential=AwsOcrCredential(
         aws_access_key_id="YOUR_KEY",
@@ -41,7 +41,7 @@ from leapx.common.types.providers import OCRProviderType
 
 pipeline = linear_pipeline(
     json_schema=schema,
-    system_prompt=prompt,
+    additional_instructions=instructions,
     ocr_provider=OCRProviderType.AZURE,
 )
 ```
@@ -82,7 +82,7 @@ from leapx.common.cache.cache_config import CacheConfig
 
 pipeline = linear_pipeline(
     json_schema=schema,
-    system_prompt=prompt,
+    additional_instructions=instructions,
     ocr_cache_config=CacheConfig(
         enabled=True,
         cache_type="sqlite",

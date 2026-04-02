@@ -20,7 +20,7 @@ from leapx.common.types.providers import ParsingMethod
 
 pipeline = linear_pipeline(
     json_schema=schema,
-    system_prompt=prompt,
+    additional_instructions=instructions,
     parser=ParsingMethod.LAYOUT_CONSERVED,
 )
 ```

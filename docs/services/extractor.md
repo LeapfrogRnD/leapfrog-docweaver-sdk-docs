@@ -11,7 +11,7 @@ The Extractor service uses LLMs to extract structured data from text based on yo
 The extractor takes parsed text and your schema, then uses an LLM to extract matching data:
 
 ```
-Parsed Text + JSON Schema + System Prompt → Structured Data
+Parsed Text + JSON Schema + Additional Instructions(Optional) → Structured Data
 ```
 
 ## Providers
@@ -25,7 +25,7 @@ from leapx.services.extractor.extractor_factory import ExtractorProvider
 
 pipeline = linear_pipeline(
     json_schema=schema,
-    system_prompt=prompt,
+    additional_instructions=instructions,
     extractor_provider=ExtractorProvider.LITE_LLM,
 )
 ```
@@ -37,7 +37,7 @@ pipeline = linear_pipeline(
 ```python
 pipeline = linear_pipeline(
     json_schema=schema,
-    system_prompt=prompt,
+    additional_instructions=instructions,
     llm_model="anthropic.claude-3-sonnet-20240229-v1:0",
     temperature=0.0,
     max_tokens="30000",
@@ -51,7 +51,7 @@ from leapx.services.credentials.bedrock_config import BedrockCredential
 
 pipeline = linear_pipeline(
     json_schema=schema,
-    system_prompt=prompt,
+    additional_instructions=instructions,
     llm_provider_credential=BedrockCredential(
         aws_access_key_id="YOUR_KEY",
         aws_secret_access_key="YOUR_SECRET",
@@ -70,20 +70,20 @@ The extractor supports any model available through LiteLLM:
 | OpenAI | `gpt-4`, `gpt-4-turbo`, `gpt-3.5-turbo` |
 | Anthropic | `claude-3-opus`, `claude-3-sonnet` |
 
-## System Prompts
+## Additional Instrcutions
 
-The system prompt guides extraction behavior:
+The instructions guides extraction behavior:
 
 ```python
-# Good system prompt
-system_prompt = """
+# Good instructions
+instructions = """
 Extract the invoice information from the OCR text.
 Be precise with numbers and dates.
 If a field is not found, use null.
 """
 
 # Specific instructions improve accuracy
-system_prompt = """
+instructions = """
 Extract the following from this medical document:
 - Patient name (full legal name)
 - Date of birth (YYYY-MM-DD format)
@@ -101,7 +101,7 @@ from leapx.common.cache.cache_config import CacheConfig
 
 pipeline = linear_pipeline(
     json_schema=schema,
-    system_prompt=prompt,
+    additional_instructions=instructions,
     llm_cache_config=CacheConfig(
         enabled=True,
         cache_type="sqlite",
@@ -129,14 +129,14 @@ pipeline = linear_pipeline(
 
 ## Best Practices
 
-### 1. Use Specific System Prompts
+### 1. Use Specific Instructions
 
 ```python
 # ✅ Good - specific instructions
-system_prompt = "Extract invoice number, date, and total amount. Format dates as YYYY-MM-DD."
+instructions = "Extract invoice number, date, and total amount. Format dates as YYYY-MM-DD."
 
 # ❌ Bad - vague
-system_prompt = "Extract data."
+instructions = "Extract data."
 ```
 
 ### 2. Set Temperature to 0 for Consistency
@@ -144,7 +144,7 @@ system_prompt = "Extract data."
 ```python
 pipeline = linear_pipeline(
     json_schema=schema,
-    system_prompt=prompt,
+    additional_instructions=instructions,
     temperature=0.0,  # Deterministic output
 )
 ```
@@ -154,7 +154,7 @@ pipeline = linear_pipeline(
 ```python
 pipeline = linear_pipeline(
     json_schema=schema,
-    system_prompt=prompt,
+    additional_instructions=instructions,
     max_tokens="30000",  # Enough for complex documents
 )
 ```

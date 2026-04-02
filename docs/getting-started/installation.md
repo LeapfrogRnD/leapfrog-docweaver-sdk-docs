@@ -9,12 +9,6 @@ sidebar_position: 2
 - **Python**: 3.12 or higher
 - **Package Manager**: pip or uv (recommended)
 
-## Install via pip
-
-```bash
-pip install leapx
-```
-
 ## Install via uv (Recommended)
 
 [uv](https://github.com/astral-sh/uv) is a fast Python package manager that we recommend for LeapX:
@@ -75,7 +69,7 @@ from leapx.pipeline.stages.layers import Stage
 # Create a minimal pipeline
 pipeline = linear_pipeline(
     json_schema={"type": "object", "properties": {"test": {"type": "string"}}},
-    system_prompt="Extract test data.",
+    additional_instructions="Extract test data.",
     stages=[Stage.LLM_EXTRACTION],
 )
 

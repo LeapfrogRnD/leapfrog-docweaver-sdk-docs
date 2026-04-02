@@ -43,7 +43,7 @@ from leapx import linear_pipeline
 
 pipeline = linear_pipeline(
     json_schema=MySchema.model_json_schema(),
-    system_prompt="Extract data",
+    additional_instructions="Extract data",
 )
 # Automatically creates: OCR -> Parser -> LLM Extraction
 ```
@@ -57,7 +57,7 @@ from leapx.pipeline.runner import dag_pipeline
 
 pipeline = dag_pipeline(
     json_schema=MySchema.model_json_schema(),
-    system_prompt="Extract data",
+    additional_instructions="Extract data",
     stages=[stage1, stage2, stage3],  # Custom stage configuration
 )
 ```

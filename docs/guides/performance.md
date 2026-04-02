@@ -17,7 +17,7 @@ from leapx.common.cache.cache_config import CacheConfig
 
 pipeline = linear_pipeline(
     json_schema=schema,
-    system_prompt=prompt,
+    additional_instructions=instructions,
     ocr_cache_config=CacheConfig(enabled=True),
     llm_cache_config=CacheConfig(enabled=True),
 )
@@ -49,30 +49,30 @@ cache = CacheConfig(
 # For high-volume, simpler extractions
 pipeline = linear_pipeline(
     json_schema=schema,
-    system_prompt=prompt,
+    additional_instructions=instructions,
     llm_model="anthropic.claude-3-haiku-20240307-v1:0",
 )
 
 # For complex extractions requiring high accuracy
 pipeline = linear_pipeline(
     json_schema=schema,
-    system_prompt=prompt,
+    additional_instructions=instructions,
     llm_model="anthropic.claude-3-sonnet-20240229-v1:0",
 )
 ```
 
 ## Token Optimization
 
-### Optimize System Prompts
+### Optimize instructions
 
-Keep prompts concise but specific:
+Keep instructions concise but specific:
 
 ```python
 # ✅ Good - concise and specific
-system_prompt = "Extract invoice number, date, total. Format dates as YYYY-MM-DD."
+instructions = "Extract invoice number, date, total. Format dates as YYYY-MM-DD."
 
 # ❌ Bad - verbose
-system_prompt = """
+instructions = """
 You are a helpful assistant that extracts information from documents.
 Please carefully read the provided text and extract the following fields:
 - The invoice number, which is usually at the top of the document
@@ -88,13 +88,13 @@ Please carefully read the provided text and extract the following fields:
 # Match token limit to expected output size
 pipeline = linear_pipeline(
     json_schema=simple_schema,
-    system_prompt=prompt,
+    additional_instructions=instructions,
     max_tokens="1000",  # Small schema
 )
 
 pipeline = linear_pipeline(
     json_schema=complex_schema,
-    system_prompt=prompt,
+    additional_instructions=instructions,
     max_tokens="30000",  # Large/nested schema
 )
 ```
@@ -109,7 +109,7 @@ import asyncio
 async def process_documents(file_paths: list[str]):
     pipeline = linear_pipeline(
         json_schema=schema,
-        system_prompt=prompt,
+        additional_instructions=instructions,
     )
     
     # Process concurrently
@@ -131,7 +131,7 @@ from leapx.pipeline.stages.layers import Stage
 # Only extraction - no OCR/Parser overhead
 pipeline = linear_pipeline(
     json_schema=schema,
-    system_prompt=prompt,
+    additional_instructions=instructions,
     stages=[Stage.LLM_EXTRACTION],
 )
 
