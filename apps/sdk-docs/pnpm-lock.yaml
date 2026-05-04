@@ -11,9 +11,6 @@ importers:
       '@docusaurus/core':
         specifier: ^3.10.1
         version: 3.10.1(@docusaurus/faster@3.10.1(@docusaurus/types@3.9.2(@swc/core@1.15.33)(react-dom@19.2.5(react@19.2.5))(react@19.2.5)))(@mdx-js/react@3.1.1(@types/react@19.2.14)(react@19.2.5))(@rspack/core@1.7.11)(@swc/core@1.15.33)(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
-      '@docusaurus/faster':
-        specifier: ^3.10.1
-        version: 3.10.1(@docusaurus/types@3.9.2(@swc/core@1.15.33)(react-dom@19.2.5(react@19.2.5))(react@19.2.5))
       '@docusaurus/preset-classic':
         specifier: ^3.10.1
         version: 3.10.1(@algolia/client-search@5.52.0)(@docusaurus/faster@3.10.1(@docusaurus/types@3.9.2(@swc/core@1.15.33)(react-dom@19.2.5(react@19.2.5))(react@19.2.5)))(@mdx-js/react@3.1.1(@types/react@19.2.14)(react@19.2.5))(@rspack/core@1.7.11)(@swc/core@1.15.33)(@types/react@19.2.14)(react-dom@19.2.5(react@19.2.5))(react@19.2.5)(search-insights@2.17.3)
@@ -35,6 +32,9 @@ importers:
       react-dom:
         specifier: ^19.0.0
         version: 19.2.5(react@19.2.5)
+      yarn:
+        specifier: ^1.22.22
+        version: 1.22.22
     devDependencies:
       '@docusaurus/module-type-aliases':
         specifier: 3.9.2
@@ -5428,6 +5428,11 @@ packages:
   yallist@3.1.1:
     resolution: {integrity: sha512-a4UGQaWPH59mOXUYnAG2ewncQS4i4F43Tv3JoAM+s2VDAmS9NsK8GpDMLrCHPksFT7h3K6TOoUNn2pb7RoXx4g==}
 
+  yarn@1.22.22:
+    resolution: {integrity: sha512-prL3kGtyG7o9Z9Sv8IPfBNrWTDmXB4Qbes8A9rEzt6wkJV8mUvoirjU0Mp3GGAU06Y0XQyA3/2/RQFVuK7MTfg==}
+    engines: {node: '>=4.0.0'}
+    hasBin: true
+
   yocto-queue@1.2.2:
     resolution: {integrity: sha512-4LCcse/U2MHZ63HAJVE+v71o7yOdIe4cZ70Wpf8D/IyjDKYQLV5GD46B+hSTjJsvV5PztjvHoU580EftxjDZFQ==}
     engines: {node: '>=12.20'}
@@ -6818,6 +6823,7 @@ snapshots:
       - esbuild
       - uglify-js
       - webpack-cli
+    optional: true
 
   '@docusaurus/logger@3.10.1':
     dependencies:
@@ -7696,30 +7702,36 @@ snapshots:
       '@types/react': 19.2.14
       react: 19.2.5
 
-  '@module-federation/error-codes@0.22.0': {}
+  '@module-federation/error-codes@0.22.0':
+    optional: true
 
   '@module-federation/runtime-core@0.22.0':
     dependencies:
       '@module-federation/error-codes': 0.22.0
       '@module-federation/sdk': 0.22.0
+    optional: true
 
   '@module-federation/runtime-tools@0.22.0':
     dependencies:
       '@module-federation/runtime': 0.22.0
       '@module-federation/webpack-bundler-runtime': 0.22.0
+    optional: true
 
   '@module-federation/runtime@0.22.0':
     dependencies:
       '@module-federation/error-codes': 0.22.0
       '@module-federation/runtime-core': 0.22.0
       '@module-federation/sdk': 0.22.0
+    optional: true
 
-  '@module-federation/sdk@0.22.0': {}
+  '@module-federation/sdk@0.22.0':
+    optional: true
 
   '@module-federation/webpack-bundler-runtime@0.22.0':
     dependencies:
       '@module-federation/runtime': 0.22.0
       '@module-federation/sdk': 0.22.0
+    optional: true
 
   '@napi-rs/wasm-runtime@1.0.7':
     dependencies:
@@ -7894,14 +7906,17 @@ snapshots:
       '@rspack/binding-win32-arm64-msvc': 1.7.11
       '@rspack/binding-win32-ia32-msvc': 1.7.11
       '@rspack/binding-win32-x64-msvc': 1.7.11
+    optional: true
 
   '@rspack/core@1.7.11':
     dependencies:
       '@module-federation/runtime-tools': 0.22.0
       '@rspack/binding': 1.7.11
       '@rspack/lite-tapable': 1.1.0
+    optional: true
 
-  '@rspack/lite-tapable@1.1.0': {}
+  '@rspack/lite-tapable@1.1.0':
+    optional: true
 
   '@sideway/address@4.1.5':
     dependencies:
@@ -8079,8 +8094,10 @@ snapshots:
       '@swc/core-win32-arm64-msvc': 1.15.33
       '@swc/core-win32-ia32-msvc': 1.15.33
       '@swc/core-win32-x64-msvc': 1.15.33
+    optional: true
 
-  '@swc/counter@0.1.3': {}
+  '@swc/counter@0.1.3':
+    optional: true
 
   '@swc/html-darwin-arm64@1.15.33':
     optional: true
@@ -8134,10 +8151,12 @@ snapshots:
       '@swc/html-win32-arm64-msvc': 1.15.33
       '@swc/html-win32-ia32-msvc': 1.15.33
       '@swc/html-win32-x64-msvc': 1.15.33
+    optional: true
 
   '@swc/types@0.1.26':
     dependencies:
       '@swc/counter': 0.1.3
+    optional: true
 
   '@szmarczak/http-timer@5.0.1':
     dependencies:
@@ -9088,7 +9107,8 @@ snapshots:
 
   destroy@1.2.0: {}
 
-  detect-libc@2.1.2: {}
+  detect-libc@2.1.2:
+    optional: true
 
   detect-node@2.1.0: {}
 
@@ -10028,6 +10048,7 @@ snapshots:
       lightningcss-linux-x64-musl: 1.32.0
       lightningcss-win32-arm64-msvc: 1.32.0
       lightningcss-win32-x64-msvc: 1.32.0
+    optional: true
 
   lilconfig@3.1.3: {}
 
@@ -11959,6 +11980,7 @@ snapshots:
       '@swc/core': 1.15.33
       '@swc/counter': 0.1.3
       webpack: 5.106.2(@swc/core@1.15.33)
+    optional: true
 
   tapable@2.3.3: {}
 
@@ -12335,6 +12357,8 @@ snapshots:
       sax: 1.6.0
 
   yallist@3.1.1: {}
+
+  yarn@1.22.22: {}
 
   yocto-queue@1.2.2: {}
 
