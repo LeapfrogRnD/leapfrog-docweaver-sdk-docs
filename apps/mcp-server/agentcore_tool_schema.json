@@ -1,0 +1,206 @@
+[
+  {
+    "name": "extract_custom_data",
+    "description": "Extract specific structured fields or data points from a document (e.g. invoice number, dates, totals, names, addresses, line items, or any custom fields). Use when the user wants structured field extraction. Do NOT use for summarization or classification.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "s3_url": {
+          "type": "string",
+          "description": "S3 URL of the document to process (e.g. 's3://bucket/path/file.pdf'). Provide either s3_url OR base64_data — never both, never neither."
+        },
+        "base64_data": {
+          "type": "string",
+          "description": "Raw base64-encoded file bytes. Provide either base64_data OR s3_url — never both, never neither."
+        },
+        "file_name": {
+          "type": "string",
+          "description": "Original filename including extension (e.g. 'invoice.pdf'). Used for format hints. Defaults to 'upload.pdf'."
+        },
+        "field_definitions": {
+          "type": "array",
+          "description": "List of fields to extract. Each item should have 'name' and 'description' keys. Omit to use server defaults.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string" },
+              "description": { "type": "string" }
+            },
+            "required": ["name"]
+          }
+        },
+        "additional_instructions": {
+          "type": "string",
+          "description": "Free-text instructions to guide extraction (e.g. 'Focus on line items only'). Omit to use server defaults."
+        },
+        "llm_model_provider": {
+          "type": "string",
+          "description": "LLM provider to use. Call get_configs first to discover valid values. Omit to use server default."
+        },
+        "llm_model": {
+          "type": "string",
+          "description": "LLM model to use. Call get_configs first to discover valid values. Omit to use server default."
+        },
+        "ocr_provider": {
+          "type": "string",
+          "description": "OCR provider to use (e.g. 'aws_textract', 'vlm'). Call get_configs to discover valid values. If 'vlm', vlm_model_provider and vlm_model are required."
+        },
+        "vlm_model_provider": {
+          "type": "string",
+          "description": "VLM provider — required only when ocr_provider is 'vlm'."
+        },
+        "vlm_model": {
+          "type": "string",
+          "description": "VLM model — required only when ocr_provider is 'vlm'."
+        }
+      },
+      "required": []
+    }
+  },
+  {
+    "name": "summarize_document",
+    "description": "Generate a natural-language summary or overview of a document. Use when the user wants a summary. Do NOT use for field extraction or classification.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "s3_url": {
+          "type": "string",
+          "description": "S3 URL of the document (e.g. 's3://bucket/path/file.pdf'). Provide either s3_url OR base64_data — never both, never neither."
+        },
+        "base64_data": {
+          "type": "string",
+          "description": "Raw base64-encoded file bytes. Provide either base64_data OR s3_url — never both, never neither."
+        },
+        "file_name": {
+          "type": "string",
+          "description": "Original filename including extension (e.g. 'report.pdf'). Defaults to 'upload.pdf'."
+        },
+        "additional_instructions": {
+          "type": "string",
+          "description": "Optional free-text to focus or constrain the summary (e.g. 'Summarize only the financial section'). Omit for a general summary."
+        },
+        "llm_model_provider": {
+          "type": "string",
+          "description": "LLM provider to use. Call get_configs first to discover valid values. Omit to use server default."
+        },
+        "llm_model": {
+          "type": "string",
+          "description": "LLM model to use. Call get_configs first to discover valid values. Omit to use server default."
+        },
+        "ocr_provider": {
+          "type": "string",
+          "description": "OCR provider to use. Call get_configs to discover valid values. If 'vlm', vlm_model_provider and vlm_model are required."
+        },
+        "vlm_model_provider": {
+          "type": "string",
+          "description": "VLM provider — required only when ocr_provider is 'vlm'."
+        },
+        "vlm_model": {
+          "type": "string",
+          "description": "VLM model — required only when ocr_provider is 'vlm'."
+        }
+      },
+      "required": []
+    }
+  },
+  {
+    "name": "classify_document",
+    "description": "Categorize or label a document into predefined classes or categories (e.g. invoice vs receipt, severity level, document type, priority, sentiment, or any custom taxonomy). Use when the user wants classification. Do NOT use for extraction or summarization.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "s3_url": {
+          "type": "string",
+          "description": "S3 URL of the document (e.g. 's3://bucket/path/file.pdf'). Provide either s3_url OR base64_data — never both, never neither."
+        },
+        "base64_data": {
+          "type": "string",
+          "description": "Raw base64-encoded file bytes. Provide either base64_data OR s3_url — never both, never neither."
+        },
+        "file_name": {
+          "type": "string",
+          "description": "Original filename including extension. Defaults to 'upload.pdf'."
+        },
+        "field_definitions": {
+          "type": "array",
+          "description": "List of category dicts, each with a 'category' key and a 'fields' list of candidate labels (each with 'name' and 'description'). Omit to use server defaults (severity + priority).",
+          "items": {
+            "type": "object",
+            "properties": {
+              "category": { "type": "string" },
+              "fields": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": { "type": "string" },
+                    "description": { "type": "string" }
+                  },
+                  "required": ["name"]
+                }
+              }
+            },
+            "required": ["category", "fields"]
+          }
+        },
+        "additional_instructions": {
+          "type": "string",
+          "description": "Optional free-text to refine classification behaviour. Omit to use server defaults."
+        },
+        "llm_model_provider": {
+          "type": "string",
+          "description": "LLM provider to use. Call get_configs first to discover valid values. Omit to use server default."
+        },
+        "llm_model": {
+          "type": "string",
+          "description": "LLM model to use. Call get_configs first to discover valid values. Omit to use server default."
+        },
+        "ocr_provider": {
+          "type": "string",
+          "description": "OCR provider to use. Call get_configs to discover valid values. If 'vlm', vlm_model_provider and vlm_model are required."
+        },
+        "vlm_model_provider": {
+          "type": "string",
+          "description": "VLM provider — required only when ocr_provider is 'vlm'."
+        },
+        "vlm_model": {
+          "type": "string",
+          "description": "VLM model — required only when ocr_provider is 'vlm'."
+        }
+      },
+      "required": []
+    }
+  },
+  {
+    "name": "check_job_status",
+    "description": "Check the status of an asynchronous document processing job. Use when a previous call to extract_custom_data, summarize_document, or classify_document returned a job ID instead of an immediate result.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "job_id": {
+          "type": "string",
+          "description": "The exact job/ticket ID string returned by the originating tool call."
+        }
+      },
+      "required": ["job_id"]
+    }
+  },
+  {
+    "name": "list_job_history",
+    "description": "List recent document processing jobs. Use when the user asks to see past jobs or when a job ID needs to be recovered from history. Do NOT use to check a known job ID — use check_job_status instead.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    }
+  },
+  {
+    "name": "get_configs",
+    "description": "Retrieve all valid values for llm_model_provider, llm_model, and ocr_provider. Call this FIRST before any document processing tool when the user specifies a model or OCR provider, to validate the requested option is supported.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    }
+  }
+]
