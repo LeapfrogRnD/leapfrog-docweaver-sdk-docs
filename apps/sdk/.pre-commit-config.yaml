@@ -1,0 +1,40 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+      - id: check-yaml
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+      - id: check-merge-conflict
+      - id: debug-statements
+
+  # Ruff - replaces black, autoflake, isort, flake8
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.6.0
+    hooks:
+      # Run the linter
+      - id: ruff
+        args: [--fix]
+      # Run the formatter
+      - id: ruff-format
+
+  # Custom hooks
+  - repo: local
+    hooks:
+      - id: pytest-check
+        name: Run pytest
+        entry: uv run pytest
+        language: system
+        pass_filenames: false
+        always_run: true
+        stages: [commit]
+      - id: commit-message-check
+        name: Check Conventional Commits format
+        entry: |
+          python -c "
+          import sys, re;
+          msg = open(sys.argv[1]).read();
+          pattern = r'^(feat|fix|chore|docs|style|refactor|test|perf)(\([a-zA-Z0-9_ -]+\))?: .{1,50}';
+          exit(0 if re.match(pattern, msg) else (print('ERROR: Invalid commit message format.\nCommit message must follow Conventional Commits convention:\n  type(scope?): short description\nExamples:\n  feat(auth): add login feature\n  fix(api service): handle null response') or 1))"
+        language: python
+        stages: [commit-msg]

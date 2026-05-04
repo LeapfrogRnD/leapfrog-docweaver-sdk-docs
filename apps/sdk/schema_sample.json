@@ -1,0 +1,50 @@
+{
+  "title": "ReferralPatient",
+  "type": "object",
+  "properties": {
+    "patient_first_name": {
+      "description": "First name of the patient",
+      "title": "Patient First Name",
+      "type": "string"
+    },
+    "patient_last_name": {
+      "description": "Last name of the patient",
+      "title": "Patient Last Name",
+      "type": "string"
+    },
+    "patient_dob": {
+      "description": "Date of birth of the patient (YYYY-MM-DD)",
+      "title": "Patient Dob",
+      "type": "string"
+    },
+    "patient_zip_code": {
+      "description": "ZIP code of the patient's address",
+      "title": "Patient Zip Code",
+      "type": "string"
+    },
+    "patient_street1": {
+      "description": "Street address of the patient",
+      "title": "Patient Street1",
+      "type": "string"
+    },
+    "patient_city": {
+      "description": "City of the patient's residence",
+      "title": "Patient City",
+      "type": "string"
+    },
+    "patient_state": {
+      "description": "State of the patient's residence",
+      "title": "Patient State",
+      "type": "string"
+    }
+  },
+  "required": [
+    "patient_first_name",
+    "patient_last_name",
+    "patient_dob",
+    "patient_zip_code",
+    "patient_street1",
+    "patient_city",
+    "patient_state"
+  ]
+}
