@@ -9,11 +9,15 @@ on:
       deploy_env:
         description: "Environment to deploy"
         required: true
-        default: "production"
+        default: production
+        type: choice
+        options:
+          - production
       skip_build:
         description: "Skip build step"
         required: false
-        default: "false"
+        default: false
+        type: boolean
 
 defaults:
   run:
@@ -51,6 +55,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Build website
+        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.skip_build }}
         run: pnpm build
 
       - name: Verify build output
