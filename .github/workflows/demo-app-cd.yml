@@ -1,0 +1,96 @@
+name: Demo App CD
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Environment to deploy"
+        required: true
+        type: choice
+        default: dev
+        options:
+          - dev
+          - prod
+
+permissions:
+  id-token: write
+  contents: read
+
+concurrency:
+  group: demo-app-cd-${{ inputs.environment }}
+  cancel-in-progress: true
+
+defaults:
+  run:
+    working-directory: apps/demo-app
+
+jobs:
+  deploy:
+    name: Deploy Demo App (${{ inputs.environment }})
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set deployment variables (dev)
+        if: inputs.environment == 'dev'
+        run: |
+          echo "DEPLOY_ENV=dev" >> "$GITHUB_ENV"
+          echo "S3_BUCKET=${{ secrets.DEV_S3_BUCKET }}" >> "$GITHUB_ENV"
+          echo "CLOUDFRONT_DISTRIBUTION_ID=${{ secrets.DEV_CLOUDFRONT_DISTRIBUTION_ID }}" >> "$GITHUB_ENV"
+          echo "VITE_OCR_API_URL=${{ secrets.DEV_VITE_OCR_API_URL }}" >> "$GITHUB_ENV"
+          echo "VITE_APP_GUIDE_URL=${{ secrets.DEV_VITE_APP_GUIDE_URL }}" >> "$GITHUB_ENV"
+          echo "VITE_ONBOARDING_GUIDE_URL=${{ secrets.DEV_VITE_ONBOARDING_GUIDE_URL }}" >> "$GITHUB_ENV"
+
+      - name: Set deployment variables (prod)
+        if: inputs.environment == 'prod'
+        run: |
+          echo "DEPLOY_ENV=prod" >> "$GITHUB_ENV"
+          echo "S3_BUCKET=${{ secrets.PROD_S3_BUCKET }}" >> "$GITHUB_ENV"
+          echo "CLOUDFRONT_DISTRIBUTION_ID=${{ secrets.PROD_CLOUDFRONT_DISTRIBUTION_ID }}" >> "$GITHUB_ENV"
+          echo "VITE_OCR_API_URL=${{ secrets.PROD_VITE_OCR_API_URL }}" >> "$GITHUB_ENV"
+          echo "VITE_APP_GUIDE_URL=${{ secrets.PROD_VITE_APP_GUIDE_URL }}" >> "$GITHUB_ENV"
+          echo "VITE_ONBOARDING_GUIDE_URL=${{ secrets.PROD_VITE_ONBOARDING_GUIDE_URL }}" >> "$GITHUB_ENV"
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9.15.4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: pnpm
+          cache-dependency-path: apps/demo-app/pnpm-lock.yaml
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build app
+        run: pnpm run build
+        env:
+          VITE_OCR_API_URL: ${{ env.VITE_OCR_API_URL }}
+          VITE_APP_GUIDE_URL: ${{ env.VITE_APP_GUIDE_URL }}
+          VITE_ONBOARDING_GUIDE_URL: ${{ env.VITE_ONBOARDING_GUIDE_URL }}
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Deploy to S3
+        run: aws s3 sync dist/ s3://${{ env.S3_BUCKET }} --delete
+
+      - name: Invalidate CloudFront cache
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id ${{ env.CLOUDFRONT_DISTRIBUTION_ID }} \
+            --paths "/*"
+
+      - name: Deployment summary
+        run: |
+          echo "Demo app deployed to ${{ env.DEPLOY_ENV }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "S3 bucket: ${{ env.S3_BUCKET }}" >> "$GITHUB_STEP_SUMMARY"
