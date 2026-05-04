@@ -20,19 +20,19 @@ jobs:
   sdk-docs:
     name: SDK Docs
     if: inputs.target == 'all' || inputs.target == 'sdk-docs'
-    uses: ./.github/workflows/cd-sdk-docs-cd.yml
+    uses: .github/workflows/cd-sdk-docs.yml
 
   frontend:
     name: Frontend
     if: inputs.target == 'all' || inputs.target == 'frontend'
-    uses: ./.github/workflows/frontend.yml
+    uses: .github/workflows/frontend.yml
 
   demo-app:
     name: Demo App
     if: inputs.target == 'all' || inputs.target == 'demo-app'
-    uses: ./.github/workflows/demo-app.yml
+    uses: .github/workflows/demo-app.yml
 
   mcp-server:
     name: MCP Server
     if: inputs.target == 'all' || inputs.target == 'mcp-server'
-    uses: ./.github/workflows/mcp-server.yml
+    uses: .github/workflows/mcp-server.yml
