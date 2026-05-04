@@ -10,9 +10,9 @@ import {themes as prismThemes} from 'prism-react-renderer';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'LeapX Pipeline SDK',
+  title: 'LeapFrog DocWeaver Pipeline SDK',
   tagline: 'Extract structured data from documents with AI-powered pipelines',
-  favicon: 'img/favicon.svg',
+  favicon: 'img/logo.png',
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
   future: {
@@ -67,10 +67,10 @@ const config = {
         respectPrefersColorScheme: true,
       },
       navbar: {
-        title: 'LeapX',
+        title: 'LeapFrog DocWeaver Pipeline SDK',
         logo: {
-          alt: 'LeapX Logo',
-          src: 'img/logo.svg',
+          alt: 'LeapFrog DocWeaver Pipeline SDK Logo',
+          src: 'img/logo.png',
         },
         items: [
           {
@@ -79,11 +79,7 @@ const config = {
             position: 'left',
             label: 'Docs',
           },
-          {
-            href: 'https://github.com/LeapFrogRnd/LeapX',
-            label: 'GitHub',
-            position: 'right',
-          },
+         
         ],
       },
       footer: {
@@ -110,8 +106,8 @@ const config = {
             title: 'Resources',
             items: [
               {
-                label: 'GitHub',
-                href: 'https://github.com/LeapFrogRnd/LeapX',
+                label: 'Leapfrog DocWeaver Demo',
+                href: 'https://demo.docweaver.lftechnology.com/',
               },
               {
                 label: 'Leapfrog',
@@ -120,7 +116,7 @@ const config = {
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} LeapX by Leapfrog. Built with Docusaurus.`,
+        copyright: `Copyright © ${new Date().getFullYear()} LeapFrog DocWeaver.`,
       },
       prism: {
         theme: prismThemes.github,

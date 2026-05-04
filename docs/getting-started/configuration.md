@@ -4,7 +4,7 @@ sidebar_position: 4
 
 # Configuration
 
-LeapX requires configuration for OCR providers and LLM services. This guide covers all configuration options.
+LeapFrog DocWeaver requires configuration for OCR providers and LLM services. This guide covers all configuration options.
 
 ## Environment Variables
 

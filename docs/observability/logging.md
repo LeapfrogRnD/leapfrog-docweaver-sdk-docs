@@ -4,11 +4,11 @@ sidebar_position: 1
 
 # Logging
 
-LeapX uses [Loguru](https://github.com/Delgan/loguru) for logging. This guide covers how to configure and use logging in your LeapX applications.
+LeapFrog DocWeaver uses [Loguru](https://github.com/Delgan/loguru) for logging. This guide covers how to configure and use logging in your LeapFrog DocWeaver applications.
 
 ## Default Configuration
 
-LeapX automatically configures logging with sensible defaults:
+LeapFrog DocWeaver automatically configures logging with sensible defaults:
 
 - **Info logs**: Written to `info.log`
 - **Error logs**: Written to `error.log`

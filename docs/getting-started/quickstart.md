@@ -10,7 +10,7 @@ This guide will help you create your first document extraction pipeline in minut
 
 Before you begin, make sure you have:
 
-1. ✅ [Installed LeapX](./installation.md)
+1. ✅ [Installed LeapFrog DocWeaver](./installation.md)
 2. ✅ [Configured credentials](./configuration.md) for OCR and LLM providers
 
 ## Basic Example

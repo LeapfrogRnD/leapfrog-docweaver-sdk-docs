@@ -4,13 +4,13 @@ sidebar_position: 1
 
 # Pipeline Overview
 
-LeapX uses a pipeline-based architecture to process documents through multiple stages. This modular design allows for flexibility, caching, and easy customization.
+LeapFrog DocWeaver uses a pipeline-based architecture to process documents through multiple stages. This modular design allows for flexibility, caching, and easy customization.
 
 ## Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                        LeapX Pipeline                           │
+│                        LeapFrog DocWeaver Pipeline              │
 ├─────────────────────────────────────────────────────────────────┤
 │                                                                 │
 │  ┌─────────┐    ┌──────────┐    ┌────────────────────┐         │
@@ -117,7 +117,7 @@ llm_stage = LLMStage(config=llm_cfg).after(parser_stage)
 
 ## Async Execution
 
-LeapX is built for async execution:
+LeapFrog DocWeaver is built for async execution:
 
 ```python
 import asyncio

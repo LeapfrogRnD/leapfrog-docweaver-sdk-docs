@@ -18,7 +18,7 @@ LANGFUSE_HOST=https://cloud.langfuse.com  # or self-hosted URL
 
 ### Installation
 
-Langfuse is included in LeapX dependencies:
+Langfuse is included in LeapFrog DocWeaver dependencies:
 
 ```bash
 pip install langfuse

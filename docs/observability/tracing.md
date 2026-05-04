@@ -4,7 +4,7 @@ sidebar_position: 2
 
 # Tracing
 
-LeapX supports distributed tracing via OpenTelemetry for monitoring pipeline execution across services.
+LeapFrog DocWeaver supports distributed tracing via OpenTelemetry for monitoring pipeline execution across services.
 
 ## Overview
 
@@ -18,7 +18,7 @@ Tracing helps you:
 
 ### Install Dependencies
 
-LeapX includes OpenTelemetry dependencies:
+LeapFrog DocWeaver includes OpenTelemetry dependencies:
 
 ```bash
 pip install opentelemetry-api opentelemetry-sdk opentelemetry-exporter-otlp
@@ -52,7 +52,7 @@ OTEL_TRACES_SAMPLER=always_on
 
 ## Trace Structure
 
-LeapX creates spans for each pipeline stage:
+LeapFrog DocWeaver creates spans for each pipeline stage:
 
 ```
 Pipeline Execution
@@ -81,7 +81,7 @@ Access UI at: `http://localhost:16686`
 
 ### Other Backends
 
-LeapX traces work with any OpenTelemetry-compatible backend:
+LeapFrog DocWeaver traces work with any OpenTelemetry-compatible backend:
 - Jaeger
 - Zipkin
 - Datadog

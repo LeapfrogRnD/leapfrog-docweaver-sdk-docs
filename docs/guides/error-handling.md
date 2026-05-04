@@ -4,7 +4,7 @@ sidebar_position: 4
 
 # Error Handling
 
-This guide covers how to handle errors in LeapX pipelines effectively.
+This guide covers how to handle errors in LeapFrog DocWeaver pipelines effectively.
 
 ## Common Exceptions
 

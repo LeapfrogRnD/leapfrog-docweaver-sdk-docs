@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # Linear Pipeline Guide
 
-The linear pipeline is the most common way to use LeapX. It creates a sequential processing workflow where each stage depends on the previous one.
+The linear pipeline is the most common way to use LeapFrog DocWeaver. It creates a sequential processing workflow where each stage depends on the previous one.
 
 ## Basic Usage
 

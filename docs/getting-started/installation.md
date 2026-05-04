@@ -39,7 +39,7 @@ pip install -e .
 
 ## Dependencies
 
-LeapX automatically installs the following key dependencies:
+LeapFrog DocWeaver automatically installs the following key dependencies:
 
 | Package | Purpose |
 |---------|---------|

@@ -4,7 +4,7 @@ sidebar_position: 3
 
 # Caching Guide
 
-LeapX provides built-in caching to avoid redundant OCR and LLM calls. This significantly improves performance and reduces costs when processing the same documents multiple times.
+LeapFrog DocWeaver provides built-in caching to avoid redundant OCR and LLM calls. This significantly improves performance and reduces costs when processing the same documents multiple times.
 
 ## Cache Types
 
