@@ -1,0 +1,195 @@
+[
+  {
+    "id": "invoice_parser",
+    "label": "Invoice",
+    "type": "extraction",
+    "data": [
+      {
+        "name": "Invoice id",
+        "type": "string",
+        "description": "Unique identifier"
+      },
+      {
+        "name": "Total Amount",
+        "type": "number",
+        "description": "Final price"
+      },
+      {
+        "name": "Vendor Name",
+        "type": "string",
+        "description": "Company name"
+      }
+    ]
+  },
+  {
+    "id": "medical_record",
+    "label": "Medical Record",
+    "type": "extraction",
+    "data": [
+      { "name": "Patient Name", "type": "string", "description": "Full name of the patient" },
+      { "name": "Date of Birth", "type": "date", "description": "Patient's date of birth" },
+      { "name": "Diagnosis", "type": "string", "description": "Primary diagnosis or condition" },
+      {
+        "name": "Treatment",
+        "type": "string",
+        "description": "Prescribed treatment or medication"
+      },
+      { "name": "Doctor Name", "type": "string", "description": "Name of the attending physician" }
+    ]
+  },
+  {
+    "id": "purchase_order",
+    "label": "Purchase Order",
+    "type": "extraction",
+    "data": [
+      { "name": "PO Number", "type": "string", "description": "Unique purchase order identifier" },
+      { "name": "Vendor Name", "type": "string", "description": "Name of the supplier or vendor" },
+      { "name": "Order Date", "type": "date", "description": "Date the order was placed" },
+      {
+        "name": "Total Amount",
+        "type": "number",
+        "description": "Total value of the purchase order"
+      },
+      { "name": "Delivery Date", "type": "date", "description": "Expected or actual delivery date" }
+    ]
+  },
+  {
+    "id": "support_classifier",
+    "label": "Support Tickets",
+    "type": "classification",
+    "data": [
+      {
+        "category": "severity",
+        "fields": [
+          {
+            "name": "High Severity",
+            "description": "The issue critically affects the system and requires immediate attention."
+          },
+          {
+            "name": "Medium Severity",
+            "description": "The issue affects functionality but does not completely block the system."
+          },
+          {
+            "name": "Low Severity",
+            "description": "The issue has minimal impact on the system and can be addressed later."
+          }
+        ]
+      },
+      {
+        "category": "component",
+        "fields": [
+          {
+            "name": "Database",
+            "description": "Issues related to database performance, connectivity, or queries."
+          },
+          {
+            "name": "API",
+            "description": "Issues related to backend APIs or service endpoints."
+          },
+          {
+            "name": "Frontend",
+            "description": "Issues affecting the user interface or client-side functionality."
+          }
+        ]
+      },
+      {
+        "category": "request_type",
+        "fields": [
+          {
+            "name": "Feature Request",
+            "description": "Customer is requesting a new feature or capability."
+          },
+          {
+            "name": "Account Change",
+            "description": "Customer needs modifications to their account settings."
+          },
+          {
+            "name": "Information Request",
+            "description": "Customer is asking for product or service information."
+          }
+        ]
+      },
+      {
+        "category": "priority",
+        "fields": [
+          {
+            "name": "Urgent",
+            "description": "The request needs immediate attention."
+          },
+          {
+            "name": "Normal",
+            "description": "The request should be handled in the normal workflow."
+          },
+          {
+            "name": "Low Priority",
+            "description": "The request can be handled later with minimal urgency."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "document_type",
+    "label": "Document Type",
+    "type": "classification",
+    "data": [
+      {
+        "category": "document_type",
+        "fields": [
+          {
+            "name": "Invoice",
+            "description": "A commercial document issued by a seller to a buyer."
+          },
+          {
+            "name": "Contract",
+            "description": "A legally binding agreement between two or more parties."
+          },
+          {
+            "name": "Report",
+            "description": "A structured document presenting findings or analysis."
+          },
+          { "name": "Receipt", "description": "Proof of payment for goods or services." },
+          { "name": "Email", "description": "An electronic message or correspondence." }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "sentiment_analysis",
+    "label": "Sentiment",
+    "type": "classification",
+    "data": [
+      {
+        "category": "sentiment",
+        "fields": [
+          {
+            "name": "Positive",
+            "description": "The content expresses a favorable or optimistic tone."
+          },
+          {
+            "name": "Negative",
+            "description": "The content expresses an unfavorable or critical tone."
+          },
+          {
+            "name": "Neutral",
+            "description": "The content is factual and does not lean positive or negative."
+          }
+        ]
+      },
+      {
+        "category": "confidence",
+        "fields": [
+          { "name": "High", "description": "The model is highly confident in the classification." },
+          {
+            "name": "Medium",
+            "description": "The model has moderate confidence in the classification."
+          },
+          {
+            "name": "Low",
+            "description": "The model has low confidence and may need human review."
+          }
+        ]
+      }
+    ]
+  }
+]

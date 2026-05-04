@@ -1,0 +1,66 @@
+name: Deploy Frontend To S3
+
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: "Branch name to execute"
+        required: false
+        default: develop
+
+env:
+  AWS_REGION: us-east-1
+  ROLE_ARN: arn:aws:iam::615854522317:role/LEAPX_BACKEND_ROLE
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    env:
+      NODE_VERSION: '20'
+      S3_BUCKET: ${{ secrets.AWS_S3_BUCKET || 'com.leapx.frontend.bucket' }}
+      CLOUDFRONT_DISTRIBUTION_ID: ${{ secrets.AWS_CLOUDFRONT_DISTRIBUTION_ID }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.branch }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build frontend
+        env:
+          VITE_API_BASE_URL: __API_BASE_URL_PLACEHOLDER__
+        run: npm run build
+
+      - name: Configure AWS credentials via OIDC
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ env.ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Verify AWS identity
+        run: |
+          echo "If this runs, OIDC is working!"
+          aws sts get-caller-identity
+
+      - name: Sync build files to S3
+        run: aws s3 sync dist/ "s3://${S3_BUCKET}" --delete
+
+      - name: Invalidate CloudFront cache
+        if: ${{ env.CLOUDFRONT_DISTRIBUTION_ID != '' }}
+        run: aws cloudfront create-invalidation --distribution-id "${CLOUDFRONT_DISTRIBUTION_ID}" --paths "/*"
+
+      - name: Skip CloudFront invalidation
+        if: ${{ env.CLOUDFRONT_DISTRIBUTION_ID == '' }}
+        run: echo "CLOUDFRONT_DISTRIBUTION_ID is not set; skipping CloudFront invalidation."
