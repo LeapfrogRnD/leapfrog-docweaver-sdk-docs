@@ -22,7 +22,7 @@ const DocSections = [
     to: "/docs/getting-started/quickstart",
     icon: <Zap className="icon" />,
     description:
-      "Get LeapX running in under 5 minutes with our step-by-step guide.",
+      "Get LeapFrog DocWeaver running in under 5 minutes with our step-by-step guide.",
   },
   {
     title: "Pipeline API",
@@ -113,7 +113,7 @@ export default function HomepageFeatures() {
       {/* Doc Hero */}
       <section className="hero">
         <div className="container hero-inner">
-          <h1 className="hero-title">LeapX Documentation</h1>
+          <h1 className="hero-title">LeapFrog DocWeaver Documentation</h1>
           <p className="hero-sub">
             The developer platform for intelligent document understanding. Turn
             messy files into structured JSON in seconds.
@@ -148,7 +148,7 @@ export default function HomepageFeatures() {
               </div>
               <h2 className="architecture-title">The Processing Pipeline</h2>
               <p className="architecture-desc">
-                LeapX uses a deterministic pipeline combined with LLM reasoning
+                LeapFrog DocWeaver uses a deterministic pipeline combined with LLM reasoning
                 to ensure high-fidelity extraction from any file type.
               </p>
               <div className="architecture-list">
@@ -339,14 +339,14 @@ print(result.name) # Returns "Jane Doe"`}
             </div>
             <div className="footer-brand">
               <div className="brand-small">L</div>
-              <span className="brand-name">LeapX</span>
+              <span className="brand-name">LeapFrog DocWeaver</span>
               <p className="brand-note">
                 Built for the developer community. Documentation v2.4.0
               </p>
             </div>
           </div>
           <div className="footer-bottom">
-            © 2024 LeapX Document Intelligence Engine
+            © 2024 LeapFrog DocWeaver Document Intelligence Engine
           </div>
         </div>
       </footer>

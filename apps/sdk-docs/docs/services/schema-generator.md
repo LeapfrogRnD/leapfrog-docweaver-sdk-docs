@@ -8,7 +8,7 @@ The Schema Generator dynamically converts JSON Schema definitions into Pydantic 
 
 ## Overview
 
-This service enables LeapX to work with JSON Schema dictionaries directly, without requiring pre-defined Pydantic models.
+This service enables LeapFrog DocWeaver to work with JSON Schema dictionaries directly, without requiring pre-defined Pydantic models.
 
 ## Basic Usage
 

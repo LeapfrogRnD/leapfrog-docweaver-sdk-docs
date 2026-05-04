@@ -4,7 +4,7 @@ sidebar_position: 5
 
 # Performance Optimization
 
-This guide covers techniques to optimize LeapX pipeline performance.
+This guide covers techniques to optimize LeapFrog DocWeaver pipeline performance.
 
 ## Caching Strategies
 

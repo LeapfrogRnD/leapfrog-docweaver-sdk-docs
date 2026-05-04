@@ -4,7 +4,7 @@ sidebar_position: 4
 
 # JSON Schema
 
-LeapX uses JSON Schema (via Pydantic models) to define the structure of data you want to extract. This guide covers how to create effective extraction schemas.
+LeapFrog DocWeaver uses JSON Schema (via Pydantic models) to define the structure of data you want to extract. This guide covers how to create effective extraction schemas.
 
 ## Defining Schemas with Pydantic
 

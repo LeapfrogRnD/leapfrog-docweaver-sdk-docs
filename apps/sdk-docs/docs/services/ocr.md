@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # OCR Service
 
-The OCR (Optical Character Recognition) service converts documents and images to text. LeapX supports multiple OCR providers.
+The OCR (Optical Character Recognition) service converts documents and images to text. LeapFrog DocWeaver supports multiple OCR providers.
 
 ## Supported Providers
 

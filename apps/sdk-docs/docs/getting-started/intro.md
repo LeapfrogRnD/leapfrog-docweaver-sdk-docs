@@ -4,9 +4,9 @@ sidebar_position: 1
 
 # Introduction
 
-## What is LeapX?
+## What is LeapFrog DocWeaver?
 
-**LeapX Pipeline SDK** is a lightweight, powerful Python SDK designed to extract structured data from documents such as PDFs, images, and text files. It leverages AI-powered parsing and OCR capabilities to identify key information with high accuracy and speed.
+**LeapFrog DocWeaver Pipeline SDK** is a lightweight, powerful Python SDK designed to extract structured data from documents such as PDFs, images, and text files. It leverages AI-powered parsing and OCR capabilities to identify key information with high accuracy and speed.
 
 ## Key Features
 
@@ -21,7 +21,7 @@ sidebar_position: 1
 
 ## How It Works
 
-LeapX uses a pipeline-based architecture with five main stages:
+LeapFrog DocWeaver uses a pipeline-based architecture with five main stages:
 
 ```
 ┌─────────┐    ┌─────────┐    ┌────────────────┐
@@ -75,7 +75,7 @@ asyncio.run(main())
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                     LeapX Pipeline SDK                          │
+│                     LeapFrog DocWeaver Pipeline SDK                          │
 ├─────────────────────────────────────────────────────────────────┤
 │  ┌─────────────────┐  ┌──────────────┐  ┌──────────────────────┐│
 │  │ linear_pipeline │  │ dag_pipeline │  │  Custom Pipelines    ││
@@ -100,6 +100,6 @@ asyncio.run(main())
 
 ## Next Steps
 
-- [Installation Guide](./installation.md) - Get LeapX installed
+- [Installation Guide](./installation.md) - Get LeapFrog DocWeaver
 - [Quick Start](./quickstart.md) - Build your first extraction pipeline
 - [Configuration](./configuration.md) - Set up credentials and environment

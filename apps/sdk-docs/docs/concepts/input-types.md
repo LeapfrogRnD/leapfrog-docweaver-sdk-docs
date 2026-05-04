@@ -4,7 +4,7 @@ sidebar_position: 3
 
 # Input Types
 
-LeapX supports multiple input types for document processing. This guide covers all supported formats and how to use them.
+LeapFrog DocWeaver supports multiple input types for document processing. This guide covers all supported formats and how to use them.
 
 ## Supported Input Types
 

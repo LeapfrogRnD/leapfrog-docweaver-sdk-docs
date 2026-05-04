@@ -4,7 +4,7 @@ sidebar_position: 2
 
 # Pipeline Stages
 
-Stages are the building blocks of LeapX pipelines. Each stage performs a specific task in the document processing workflow.
+Stages are the building blocks of LeapFrog DocWeaver pipelines. Each stage performs a specific task in the document processing workflow.
 
 ## Available Stages
 
