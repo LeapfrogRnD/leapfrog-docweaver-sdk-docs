@@ -1,0 +1,95 @@
+name: Deploy Application To ECR
+
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: "Branch name to execute"
+        required: false
+        default: develop
+
+env:
+  AWS_REGION: us-east-1
+  ROLE_ARN: arn:aws:iam::615854522317:role/LEAPX_BACKEND_ROLE
+  ECR_REPOSITORY: ${{ secrets.ECR_REPO_NAME || 'leapx/backend' }}
+  ECR_DOC_PROCESSOR_REPOSITORY: ${{ secrets.ECR_DOC_PROCESSOR_REPO_NAME || 'leapx/doc-processor' }}
+
+jobs:
+  build-and-push:
+    name: Build and Push Docker Images
+    runs-on: ubuntu-latest
+    # ESSENTIAL: Permissions must be defined here for restricted repos
+    permissions:
+      id-token: write
+      contents: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.branch }}
+
+      # Removed manual 'Inspect OIDC token' as it causes 401 errors 
+      # by exhausting the token request in restricted environments.
+
+      - name: Configure AWS credentials via OIDC
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ env.ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Verify AWS identity
+        run: |
+          echo "If this runs, OIDC is working!"
+          aws sts get-caller-identity
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Extract image metadata
+        id: meta
+        run: |
+          VERSION=latest
+
+          SHORT_SHA=$(echo $GITHUB_SHA | cut -c1-7)
+          DATE=$(date -u +'%Y%m%d')
+
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "short_sha=$SHORT_SHA" >> $GITHUB_OUTPUT
+          echo "date=$DATE" >> $GITHUB_OUTPUT
+
+      - name: Build and Push Backend Docker image
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          IMAGE_TAG: ${{ steps.meta.outputs.version }}
+          SHORT_SHA: ${{ steps.meta.outputs.short_sha }}
+          BUILD_DATE: ${{ steps.meta.outputs.date }}
+        run: |
+          docker build \
+            --tag $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG \
+            --tag $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG-$SHORT_SHA \
+            --tag $ECR_REGISTRY/$ECR_REPOSITORY:$BUILD_DATE-$SHORT_SHA \
+            .
+          
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG-$SHORT_SHA
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$BUILD_DATE-$SHORT_SHA
+
+      - name: Build and Push Doc Processor Docker image
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          IMAGE_TAG: ${{ steps.meta.outputs.version }}
+          SHORT_SHA: ${{ steps.meta.outputs.short_sha }}
+          BUILD_DATE: ${{ steps.meta.outputs.date }}
+        run: |
+          docker build \
+            --file doc_processor/Dockerfile \
+            --tag $ECR_REGISTRY/$ECR_DOC_PROCESSOR_REPOSITORY:$IMAGE_TAG \
+            --tag $ECR_REGISTRY/$ECR_DOC_PROCESSOR_REPOSITORY:$IMAGE_TAG-$SHORT_SHA \
+            --tag $ECR_REGISTRY/$ECR_DOC_PROCESSOR_REPOSITORY:$BUILD_DATE-$SHORT_SHA \
+            .
+          
+          docker push $ECR_REGISTRY/$ECR_DOC_PROCESSOR_REPOSITORY:$IMAGE_TAG
+          docker push $ECR_REGISTRY/$ECR_DOC_PROCESSOR_REPOSITORY:$IMAGE_TAG-$SHORT_SHA
+          docker push $ECR_REGISTRY/$ECR_DOC_PROCESSOR_REPOSITORY:$BUILD_DATE-$SHORT_SHA
