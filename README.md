@@ -1,46 +1,41 @@
-# Leapfrog Docweaver Monorepo
+# Website
 
-This repository is a monorepo that contains multiple applications and services for the Leapfrog Docweaver platform.
+This website is built using [Docusaurus](https://docusaurus.io/), a modern static website generator.
 
-It includes:
-- Backend services (API and document processing)
-- An MCP server
-- Frontend applications
+## Installation
 
-## Repository Layout
+```bash
+yarn
+```
 
-### `apps/backend/`
-Python backend workspace with:
-- Main API service
-- Document processor service
-- Database migrations (Alembic)
-- Backend tests
+## Local Development
 
-### `apps/frontend/`
-Primary frontend application (Vite + TypeScript).
+```bash
+yarn start
+```
 
-### `apps/demo-app/`
-Demo frontend application used for experiments and integration testing.
+This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
 
-### `apps/mcp-server/`
-Model Context Protocol (MCP) server implementation and related deployment/runtime files.
+## Build
 
-## Why This Is a Monorepo
+```bash
+yarn build
+```
 
-Keeping backend, MCP, and frontend apps in one repository makes it easier to:
-- Share contracts and integration logic
-- Coordinate changes across services and UI
-- Manage development workflows in one place
+This command generates static content into the `build` directory and can be served using any static contents hosting service.
 
-## Notes
+## Deployment
 
-- Each app/service has its own `README.md` for setup and run instructions.
-- Use the package-level docs for environment-specific commands.
+Using SSH:
 
-## Related Repositories
+```bash
+USE_SSH=true yarn deploy
+```
 
-| Repository | Description |
-|---|---|
-| [leapfrog-docweaver-sdk](https://github.com/LeapfrogRnD/leapfrog-docweaver-sdk) | SDK for integrating with the Docweaver platform |
-| [leapfrog-docweaver-sdk-docs](https://github.com/LeapfrogRnD/leapfrog-docweaver-sdk-docs) | SDK documentation and reference guides |
+Not using SSH:
 
+```bash
+GIT_USER=<Your GitHub username> yarn deploy
+```
+
+If you are using GitHub pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.

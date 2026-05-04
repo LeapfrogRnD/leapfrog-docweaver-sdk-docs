@@ -1,6 +1,0 @@
-.venv
-*.lock
-.env
-.vscode
-*.pyc
-__pycache__/
