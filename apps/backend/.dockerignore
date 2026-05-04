@@ -1,0 +1,51 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Virtual environments
+venv/
+env/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+.git
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Project specific
+uploads/
+logs/
+*.log
+
+# Development files
+*.zip
+
+# Lock files (we use requirements.txt)
+pnpm-lock.yaml
+
+# Documentation
+README.md
+Makefile
+
+# Testing
+tests/
+pytest_cache/
+.coverage
+.venv
+.leapx_cache
+.ruff_cache
+.env.example
+.env
