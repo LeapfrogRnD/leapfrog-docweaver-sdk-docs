@@ -1,6 +1,5 @@
 *node_modules*
 dist/*
 .next/*
-*-lock.json
 *.log
 .DS_Store
