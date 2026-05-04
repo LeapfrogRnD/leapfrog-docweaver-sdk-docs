@@ -1,0 +1,431 @@
+/**
+ * Any CSS included here will be global. The classic template
+ * bundles Infima by default. Infima is a CSS framework designed to
+ * work well for content-centric websites.
+ */
+
+/* LeapX Brand Colors */
+:root {
+  --ifm-color-primary: #038E43;
+  --ifm-color-primary-dark: #038E43;
+  --ifm-color-primary-darker: #038E43;
+  --ifm-color-primary-darkest: #013712;
+  --ifm-color-primary-light: #038E43;
+  --ifm-color-primary-lighter: #038E43;
+  --ifm-color-primary-lightest: #ffffff;
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(2,97,41,0.08);
+}
+
+/* For readability concerns, you should choose a lighter palette in dark mode. */
+[data-theme='dark'] {
+  --ifm-color-primary: #038E43;
+  --ifm-color-primary-dark: #038E43;
+  --ifm-color-primary-darker: #038E43;
+  --ifm-color-primary-darkest: #038E43;
+  --ifm-color-primary-light: #ffffff;
+  --ifm-color-primary-lighter: #ffffff;
+  --ifm-color-primary-lightest: #eaf8f0;
+  --docusaurus-highlighted-code-line-bg: rgba(90,166,121,0.18);
+}
+
+/* Hero customization */
+.hero--primary {
+  --ifm-hero-background-color: var(--ifm-color-primary);
+  --ifm-hero-text-color: #ffffff;
+}
+
+/* Button styling */
+.button--secondary {
+  --ifm-button-background-color: #ffffff;
+  --ifm-button-color: var(--ifm-color-primary);
+}
+
+.button--secondary:hover {
+  --ifm-button-background-color: #f3f4f6;
+}
+
+/* Layout helpers */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.site-root {
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  color: #0f172a;
+  background: var(--ifm-color-primary-lightest);
+}
+
+/* Navigation */
+.site-nav {
+  background: #ffffff;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 0;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.brand-logo {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: var(--ifm-color-primary);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+
+.brand-title {
+  font-weight: 600;
+  color: var(--ifm-color-primary-dark);
+}
+
+.nav-links .nav-link {
+  margin-left: 1rem;
+  color: var(--ifm-color-primary-dark);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.search-area {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.search-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #f8fafb;
+  border: 1px solid #e5e7eb;
+  padding: 0.375rem 0.5rem;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 560px;
+}
+
+.search-input {
+  border: none;
+  outline: none;
+  background: transparent;
+  flex: 1;
+  padding: 0.25rem 0;
+}
+
+.kbd-shortcut {
+  background: #111827;
+  color: white;
+  font-size: 0.75rem;
+  padding: 0.125rem 0.45rem;
+  border-radius: 6px;
+}
+
+/* Hero */
+.hero {
+  padding: 3rem 0;
+  background: linear-gradient(180deg, var(--ifm-color-primary) 0%, rgba(2,97,41,0.9) 100%);
+  color: #ffffff;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-inner {
+  padding: 2rem 0;
+}
+
+.hero-title {
+  font-size: 2.25rem;
+  margin: 0 0 0.5rem 0;
+}
+
+.hero-sub {
+  color: rgba(255, 255, 255, 0.95);
+  max-width: 60ch;
+  margin-bottom: 1rem;
+}
+
+.hero-cta .btn {
+  margin-right: 0.5rem;
+}
+
+.hero-glow {
+  position: absolute;
+  right: -120px;
+  top: -40px;
+  width: 420px;
+  height: 420px;
+  background: radial-gradient(circle at center, rgba(168,223,200,0.12), transparent 40%);
+  filter: blur(40px);
+  pointer-events: none;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.btn-primary {
+  background: var(--ifm-color-primary-light);
+  color: white;
+  box-shadow: 0 6px 24px rgba(2, 97, 41, 0.12);
+}
+
+.btn-secondary {
+  background: #ffffff;
+  color: var(--ifm-color-primary);
+}
+
+/* Core grid / cards */
+.grid.core-sections {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.doc-card {
+  display: block;
+  padding: 1rem;
+  border-radius: 10px;
+  background: #ffffff;
+  border: 1px solid rgba(14, 28, 40, 0.03);
+  text-decoration: none;
+  color: inherit;
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.doc-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 30px rgba(2, 97, 41, 0.06);
+}
+
+.doc-card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.doc-card-icon .icon {
+  width: 32px;
+  height: 32px;
+  color: var(--ifm-color-primary);
+}
+
+.doc-card-title {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.doc-card-desc {
+  margin-top: 0.5rem;
+  color: #475569;
+}
+
+/* Architecture / workflow */
+.architecture {
+  margin-top: 2rem;
+  padding: 1.5rem 0;
+}
+
+.visual-panel {
+  background: linear-gradient(180deg, rgba(2,97,41,0.03), rgba(2,97,41,0.01));
+  padding: 1rem;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 180px;
+}
+
+.visual-inner {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  position: relative;
+}
+
+.visual-line {
+  width: 2px;
+  height: 120px;
+  background: rgba(2,97,41,0.08);
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 30px;
+}
+
+/* WorkflowStep */
+.workflow-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  width: 90px;
+  position: relative;
+  z-index: 2;
+}
+
+.step-circle {
+  width: 56px;
+  height: 56px;
+  border-radius: 999px;
+  background: #ffffff;
+  border: 1px solid rgba(2,97,41,0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.step-icon {
+  width: 22px;
+  height: 22px;
+  color: var(--ifm-color-primary);
+}
+
+.step-label {
+  font-size: 0.875rem;
+  color: #334155;
+  text-align: center;
+}
+
+.workflow-step.active .step-circle {
+  background: var(--ifm-color-primary);
+}
+
+.workflow-step.active .step-icon {
+  color: white;
+  transform: scale(1.05);
+}
+
+.workflow-step.active .step-label {
+  font-weight: 700;
+  color: var(--ifm-color-primary-dark);
+}
+
+.step-glow {
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: radial-gradient(circle at center, rgba(2,97,41,0.12), transparent 40%);
+  pointer-events: none;
+}
+
+/* Code and capabilities */
+.code-panel {
+  background: #ffffff;
+  color: #4e7291;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.code-filename {
+  color: #94a3b8;
+  font-size: 0.85rem;
+}
+
+.capability-card {
+  background: #ffffff;
+  border: 1px solid rgba(14,28,40,0.03);
+  padding: 0.75rem;
+  border-radius: 8px;
+  margin-bottom: 0.75rem;
+}
+
+.capability-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.capability-title-item {
+  margin: 0;
+}
+
+/* Integrations */
+.integrations-list {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-top: 0.75rem;
+}
+
+.integration-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background: #ffffff;
+  border-radius: 8px;
+  border: 1px solid rgba(14,28,40,0.03);
+}
+
+/* Support card */
+.support-card {
+  margin-top: 1.25rem;
+  background: linear-gradient(90deg, rgba(2,97,41,0.06), rgba(2,97,41,0.02));
+  padding: 1rem;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Footer */
+.site-footer {
+  margin-top: 2rem;
+  padding: 2rem 0;
+  background: #f8fafb;
+  color: #0f172a;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1rem;
+  align-items: start;
+}
+
+.footer-heading {
+  margin: 0 0 0.5rem 0;
+}
+
+.footer-link {
+  color: var(--ifm-color-primary-dark);
+  text-decoration: none;
+}
+
+/* Small responsive tweaks */
+@media (max-width: 640px) {
+  .hero-title { font-size: 1.5rem; }
+  .visual-inner { flex-direction: column; }
+}
