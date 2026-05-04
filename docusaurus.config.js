@@ -23,11 +23,11 @@ const config = {
   url: 'https://LeapFrogRnd.github.io',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/leap-doc-weaver-sdk-docs/',
+  baseUrl: '/leapfrog-docweaver-sdk-docs/',
 
   // GitHub pages deployment config.
   organizationName: 'LeapFrogRnd', // Usually your GitHub org/user name.
-  projectName: 'leap-doc-weaver-sdk-docs', // Usually your repo name.
+  projectName: 'leapfrog-docweaver-sdk-docs', // Usually your repo name.
   trailingSlash: false,
 
   onBrokenLinks: 'throw',
@@ -48,7 +48,7 @@ const config = {
         docs: {
           sidebarPath: './sidebars.js',
           editUrl:
-            'https://github.com/LeapFrogRnd/LeapX/tree/main/',
+            'https://github.com/LeapFrogRnd/leapfrog-docweaver-sdk-docs/tree/main/',
         },
         blog: false, // Disable blog
         theme: {
@@ -62,7 +62,7 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       // Replace with your project's social card
-      image: 'img/leapx-social-card.jpg',
+      image: 'img/leapfrog-social-card.jpg',
       colorMode: {
         respectPrefersColorScheme: true,
       },
