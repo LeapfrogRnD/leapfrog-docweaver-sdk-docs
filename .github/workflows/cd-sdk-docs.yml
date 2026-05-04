@@ -34,10 +34,10 @@ jobs:
           node-version: 22
 
       - name: Install dependencies
-        run: yarn install
+        run: pnpm install
 
       - name: Build website
-        run: yarn build
+        run: pnpm build
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
@@ -59,3 +59,10 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+  output-url:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Output URL
+        run: echo "Documentation URL: ${{ needs.deploy.outputs.page_url }}"
