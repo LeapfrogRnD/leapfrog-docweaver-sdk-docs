@@ -1,0 +1,434 @@
+/**
+ * api-guide.css
+ * 
+ * Styles for the API Integration Guide component.
+ * Uses design system CSS variables for maintainability.
+ * All colors, spacing, typography, and radii use CSS custom properties
+ * defined in /src/styles/theme.css
+ */
+
+/* ═══════════════════════════════════════════════════════════════════════ */
+/* Overlay & Layout */
+/* ═══════════════════════════════════════════════════════════════════════ */
+
+.api-guide-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  overflow-y: auto;
+}
+
+.api-guide-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  backdrop-filter: blur(20px);
+}
+
+.api-guide-header-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: var(--spacing-5) var(--spacing-8);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.api-guide-header-left {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+}
+
+.api-guide-logo {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, var(--primary) 0%, var(--chart-2) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 12px rgba(3, 142, 67, 0.25);
+}
+
+.api-guide-title {
+  margin: 0;
+  font-size: var(--text-xl);
+  letter-spacing: -0.01em;
+  font-weight: var(--font-weight-medium);
+}
+
+.api-guide-subtitle {
+  margin: 0;
+  font-size: var(--text-sm);
+}
+
+/* Page Title Hero */
+.api-page-hero {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: var(--spacing-8) var(--spacing-8) 0;
+}
+
+.api-page-hero-title {
+  margin: 0 0 var(--spacing-2) 0;
+  font-size: var(--text-3xl);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+}
+
+.api-page-hero-subtitle {
+  margin: 0;
+  font-size: var(--text-sm);
+  line-height: 1.6;
+}
+
+.api-page-hero-divider {
+  margin-top: var(--spacing-6);
+  border: none;
+  border-top: 1px solid;
+}
+
+/* Layout with Sidebar */
+.api-guide-layout {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: var(--spacing-8);
+  padding: var(--spacing-8);
+}
+
+.api-guide-content {
+  max-width: 900px;
+  padding: var(--spacing-2) 0 var(--spacing-20);
+  min-width: 0;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════ */
+/* Sidebar Navigation */
+/* ═══════════════════════════════════════════════════════════════════════ */
+
+.api-guide-sidebar {
+  position: sticky;
+  top: 88px;
+  height: fit-content;
+  max-height: calc(100vh - 110px);
+  overflow-y: auto;
+  border-radius: var(--radius-lg);
+  border: 1px solid;
+  padding: var(--spacing-4);
+  backdrop-filter: blur(20px);
+}
+
+.api-guide-nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+}
+
+.api-nav-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.api-nav-group-header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  padding: var(--spacing-2) var(--spacing-3);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-align: left;
+  border-radius: var(--radius-md);
+  transition: background-color 0.15s;
+}
+
+.api-nav-group-header:hover {
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+.api-guide-overlay.dark .api-nav-group-header:hover {
+  background-color: rgba(255, 255, 255, 0.03);
+}
+
+.api-nav-chevron {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+}
+
+.api-nav-items {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: var(--spacing-1) 0 var(--spacing-2);
+}
+
+.api-nav-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  padding: var(--spacing-2) var(--spacing-3);
+  background: none;
+  border: 1px solid;
+  cursor: pointer;
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-normal);
+  text-align: left;
+  border-radius: var(--radius-lg);
+  transition: all 0.2s;
+  margin-left: var(--spacing-5);
+}
+
+.api-nav-item:hover {
+  transform: translateX(2px);
+}
+
+.api-nav-icon {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .api-guide-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .api-guide-sidebar {
+    position: relative;
+    top: 0;
+    max-height: none;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════ */
+/* Buttons */
+/* ═══════════════════════════════════════════════════════════════════════ */
+
+.api-close-button {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  padding: var(--spacing-2) var(--spacing-4);
+  border-radius: var(--radius-md);
+  border: 1px solid;
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.api-copy-button {
+  position: absolute;
+  top: var(--spacing-3);
+  right: var(--spacing-3);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  padding: var(--spacing-2) var(--spacing-3);
+  border-radius: var(--radius-lg);
+  border: 1px solid;
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════ */
+/* Icons */
+/* ═══════════════════════════════════════════════════════════════════════ */
+
+.api-icon-sm {
+  width: 12px;
+  height: 12px;
+}
+
+.api-icon-md {
+  width: 16px;
+  height: 16px;
+}
+
+.api-icon-badge {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-lg);
+  border: 1px solid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════ */
+/* Sections */
+/* ═══════════════════════════════════════════════════════════════════════ */
+
+.api-section {
+  border: 1px solid;
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-8);
+  margin-bottom: var(--spacing-6);
+  backdrop-filter: blur(20px);
+}
+
+.api-section-header {
+  margin-bottom: var(--spacing-6);
+}
+
+.api-section-header-row {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  margin-bottom: var(--spacing-2);
+}
+
+.api-section-title {
+  margin: 0;
+  font-size: var(--text-2xl);
+  letter-spacing: -0.02em;
+  font-weight: 700;
+}
+
+.api-section-subtitle {
+  margin: 0 0 0 44px;
+  font-size: var(--text-sm);
+  line-height: 1.6;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════ */
+/* Typography */
+/* ═══════════════════════════════════════════════════════════════════════ */
+
+.api-text-content {
+  margin-top: var(--spacing-5);
+  font-size: var(--text-sm);
+  line-height: 1.7;
+}
+
+.api-paragraph {
+  margin: 0 0 var(--spacing-4) 0;
+}
+
+.api-subsection-title {
+  margin: var(--spacing-5) 0 var(--spacing-2) 0;
+  font-weight: var(--font-weight-medium);
+}
+
+.api-endpoint-title {
+  font-size: var(--text-lg);
+  margin: 0 0 var(--spacing-4) 0;
+  letter-spacing: -0.01em;
+  font-weight: var(--font-weight-medium);
+}
+
+.api-list {
+  margin: 0 0 var(--spacing-5) 0;
+  padding-left: var(--spacing-5);
+}
+
+.api-list li {
+  margin-bottom: var(--spacing-2);
+}
+
+.api-list li:last-child {
+  margin-bottom: 0;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════ */
+/* Code Blocks */
+/* ═══════════════════════════════════════════════════════════════════════ */
+
+.api-code-block {
+  position: relative;
+  border: 1px solid;
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-4);
+  margin-top: var(--spacing-3);
+  margin-bottom: var(--spacing-4);
+}
+
+.api-code-pre {
+  margin: 0;
+  font-family: ui-monospace, 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  overflow-x: auto;
+  padding-right: 100px;
+}
+
+.api-inline-code {
+  border: 1px solid;
+  border-radius: var(--radius-sm);
+  padding: 2px var(--spacing-2);
+  font-size: var(--text-sm);
+  font-family: ui-monospace, 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════ */
+/* Tables */
+/* ═══════════════════════════════════════════════════════════════════════ */
+
+.api-table-wrapper {
+  overflow-x: auto;
+  margin-top: var(--spacing-4);
+  margin-bottom: var(--spacing-4);
+  border-radius: var(--radius-md);
+  border: 1px solid;
+}
+
+.api-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--text-sm);
+}
+
+.api-table-header {
+  padding: var(--spacing-3) var(--spacing-4);
+  text-align: left;
+  border-bottom: 1px solid;
+  font-weight: var(--font-weight-medium);
+}
+
+.api-table-row {
+  transition: background-color 0.15s;
+}
+
+.api-table-cell {
+  padding: var(--spacing-3) var(--spacing-4);
+  border-bottom: 1px solid;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════ */
+/* Warning Box */
+/* ═══════════════════════════════════════════════════════════════════════ */
+
+.api-warning-box {
+  padding: var(--spacing-3) var(--spacing-4);
+  border: 1px solid;
+  border-radius: var(--radius-md);
+  margin-top: var(--spacing-4);
+  display: flex;
+  gap: var(--spacing-3);
+  align-items: flex-start;
+}
+
+.api-warning-box p {
+  margin: 0;
+  font-size: var(--text-sm);
+  line-height: 1.6;
+}
+
+.api-warning-box .api-icon-sm {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
