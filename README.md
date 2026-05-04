@@ -36,3 +36,11 @@ Keeping backend, MCP, and frontend apps in one repository makes it easier to:
 
 - Each app/service has its own `README.md` for setup and run instructions.
 - Use the package-level docs for environment-specific commands.
+
+## Related Repositories
+
+| Repository | Description |
+|---|---|
+| [leapfrog-docweaver-sdk](https://github.com/LeapfrogRnD/leapfrog-docweaver-sdk) | SDK for integrating with the Docweaver platform |
+| [leapfrog-docweaver-sdk-docs](https://github.com/LeapfrogRnD/leapfrog-docweaver-sdk-docs) | SDK documentation and reference guides |
+
