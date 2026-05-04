@@ -1,16 +1,16 @@
 name: Deploy SDK Documentation to GitHub Pages
 
 on:
-  push:
-    branches:
-      - main
   workflow_dispatch:
     inputs:
-      deploy_env:
-        description: "Environment to deploy"
-        required: true
+      branch:
+        description: "Branch name to execute"
+        required: false
+        default: develop
+      environment:
+        description: "Deployment environment"
+        required: false
         default: production
-        type: choice
         options:
           - production
       skip_build:
