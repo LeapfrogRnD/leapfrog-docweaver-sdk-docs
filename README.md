@@ -22,7 +22,7 @@ Primary frontend application (Vite + TypeScript).
 ### `apps/demo-app/`
 Demo frontend application used for experiments and integration testing.
 
-### `mcp-server/`
+### `apps/mcp-server/`
 Model Context Protocol (MCP) server implementation and related deployment/runtime files.
 
 ## Why This Is a Monorepo

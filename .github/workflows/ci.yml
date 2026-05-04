@@ -1,0 +1,57 @@
+name: CI
+
+on:
+  push:
+    branches: ["main", "develop"]
+  pull_request:
+
+jobs:
+  # Detect which apps have changed
+  changes:
+    name: Detect Changes
+    runs-on: ubuntu-latest
+    outputs:
+      backend: ${{ steps.filter.outputs.backend }}
+      frontend: ${{ steps.filter.outputs.frontend }}
+      demo-app: ${{ steps.filter.outputs.demo-app }}
+      mcp-server: ${{ steps.filter.outputs.mcp-server }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Detect changed paths
+        uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            backend:
+              - "apps/backend/**"
+            frontend:
+              - "apps/frontend/**"
+            demo-app:
+              - "apps/demo-app/**"
+            mcp-server:
+              - "apps/mcp-server/**"
+
+  backend:
+    name: Backend
+    needs: changes
+    if: needs.changes.outputs.backend == 'true'
+    uses: ./.github/workflows/backend.yml
+
+  frontend:
+    name: Frontend
+    needs: changes
+    if: needs.changes.outputs.frontend == 'true'
+    uses: ./.github/workflows/frontend.yml
+
+  demo-app:
+    name: Demo App
+    needs: changes
+    if: needs.changes.outputs.demo-app == 'true'
+    uses: ./.github/workflows/demo-app.yml
+
+  mcp-server:
+    name: MCP Server
+    needs: changes
+    if: needs.changes.outputs.mcp-server == 'true'
+    uses: ./.github/workflows/mcp-server.yml
