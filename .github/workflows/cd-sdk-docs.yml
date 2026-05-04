@@ -1,5 +1,4 @@
 name: Deploy SDK Documentation to GitHub Pages
-
 on:
   workflow_dispatch:
     inputs:
@@ -7,10 +6,12 @@ on:
         description: "Branch name to execute"
         required: false
         default: develop
+        type: string
       environment:
         description: "Deployment environment"
         required: false
         default: production
+        type: choice
         options:
           - production
       skip_build:
