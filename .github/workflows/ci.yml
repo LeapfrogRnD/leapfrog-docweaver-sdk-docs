@@ -10,16 +10,17 @@ on:
         type: choice
         options:
           - all
+          - sdk-docs
           - backend
           - frontend
           - demo-app
           - mcp-server
 
 jobs:
-  backend:
-    name: Backend
-    if: inputs.target == 'all' || inputs.target == 'backend'
-    uses: ./.github/workflows/backend.yml
+  sdk-docs:
+    name: SDK Docs
+    if: inputs.target == 'all' || inputs.target == 'sdk-docs'
+    uses: ./.github/workflows/cd-sdk-docs-cd.yml
 
   frontend:
     name: Frontend
