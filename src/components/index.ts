@@ -1,0 +1,10 @@
+export { Sidebar } from './Sidebar';
+export { ErrorBoundary } from './ErrorBoundary';
+export { Footer } from './Footer';
+export { Breadcrumbs } from './Breadcrumbs';
+export { Header } from './Header';
+export { PageHeader } from './PageHeader';
+export { ProtectedRoute } from './ProtectedRoute';
+export { FileUploader } from './FileUploader';
+export { StatCard } from './StatCard';
+export { RecentActivityCard } from './RecentActivityCard';
